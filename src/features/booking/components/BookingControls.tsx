@@ -123,11 +123,15 @@ export function TextField({
   value,
   onChange,
   placeholder,
+  maxLength,
+  inputMode,
 }: {
   label: string
   value: string
   onChange: (v: string) => void
   placeholder?: string
+  maxLength?: number
+  inputMode?: 'text' | 'tel' | 'email'
 }) {
   return (
     <label className="block">
@@ -139,6 +143,8 @@ export function TextField({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
+        maxLength={maxLength}
+        inputMode={inputMode}
         className="w-full border border-ink/15 bg-white px-3 py-2 text-sm focus:outline-none focus:border-gold"
       />
     </label>

@@ -45,8 +45,8 @@ export function BookingSidebar({
         : '—'
 
   return (
-    <aside className="lg:col-span-4 h-fit lg:sticky lg:top-12">
-      <div className="bg-ink text-paper p-8 border-b-8 border-gold">
+    <aside className="lg:col-span-4 h-fit lg:sticky lg:top-12 min-w-0">
+      <div className="bg-ink text-paper p-6 md:p-8 border-b-8 border-gold">
         <h2 className="font-serif text-2xl mb-6 border-b border-paper/10 pb-4">
           Resumo da reserva
         </h2>

@@ -20,15 +20,15 @@ export function BookingSuccess({ appointment, onNewBooking }: BookingSuccessProp
   })
 
   return (
-    <main className="flex-1 max-w-3xl mx-auto px-6 md:px-12 py-24 w-full">
+    <main className="flex-1 max-w-3xl mx-auto px-4 md:px-12 py-12 md:py-24 w-full">
       <span className="text-[10px] uppercase tracking-[0.3em] text-gold">
         Confirmado
       </span>
-      <h1 className="font-serif text-5xl italic mt-4 mb-8">
+      <h1 className="font-serif text-4xl md:text-5xl italic mt-4 mb-8">
         Seu horário está reservado.
       </h1>
-      <div className="bg-ink text-paper p-10 border-b-8 border-gold">
-        <div className="grid grid-cols-2 gap-y-8">
+      <div className="bg-ink text-paper p-6 md:p-10 border-b-8 border-gold">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-y-8">
           <Field label="Serviço" value={service.name} />
           <Field label="Profissional" value={professional.name} />
           <Field
@@ -40,11 +40,11 @@ export function BookingSuccess({ appointment, onNewBooking }: BookingSuccessProp
           <Field label="Em nome de" value={appointment.customer.name} />
           <Field label="Telefone" value={appointment.customer.phone} />
         </div>
-        <p className="text-[10px] text-paper/30 italic mt-10">
+        <p className="text-[10px] text-paper/30 italic mt-8 md:mt-10">
           Pague diretamente na barbearia após o serviço.
         </p>
       </div>
-      <div className="mt-10 flex gap-4">
+      <div className="mt-8 md:mt-10 flex flex-wrap gap-4">
         <button
           type="button"
           onClick={() => navigate('/meus-agendamentos')}
@@ -74,9 +74,13 @@ function Field({
   accent?: boolean
 }) {
   return (
-    <div>
+    <div className="min-w-0">
       <p className="text-[10px] uppercase tracking-[0.25em] text-paper/40">{label}</p>
-      <p className={`font-serif text-2xl ${accent ? 'text-gold' : ''}`}>{value}</p>
+      <p
+        className={`font-serif text-xl md:text-2xl break-words ${accent ? 'text-gold' : ''}`}
+      >
+        {value}
+      </p>
     </div>
   )
 }

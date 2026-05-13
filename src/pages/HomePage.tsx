@@ -8,24 +8,24 @@ export function HomePage() {
     <div className="min-h-screen bg-paper text-ink">
       <SiteHeader />
 
-      <section className="px-6 md:px-12 max-w-7xl mx-auto pt-16 md:pt-24 pb-20">
+      <section className="px-4 md:px-12 max-w-7xl mx-auto pt-12 md:pt-24 pb-16 md:pb-20">
         <div className="grid lg:grid-cols-12 gap-12 items-end">
           <div className="lg:col-span-8">
             <span className="text-[10px] uppercase tracking-[0.3em] text-ink/40">
               Desde 1998 · Centro
             </span>
-            <h1 className="font-serif text-5xl md:text-7xl leading-[1.05] mt-4 mb-6 italic">
+            <h1 className="font-serif text-4xl md:text-7xl leading-[1.05] mt-4 mb-6 italic">
               Tradição em cada corte,<br />
               <span className="text-gold">excelência</span> em cada detalhe.
             </h1>
-            <p className="max-w-xl text-ink/60 text-lg">
+            <p className="max-w-xl text-ink/60 text-base md:text-lg">
               Reserve com nossos mestres em poucos toques. Sem cadastro, sem pagamento
               online — só ritual.
             </p>
-            <div className="mt-10 flex gap-4 items-center">
+            <div className="mt-8 md:mt-10 flex flex-wrap gap-4 items-center">
               <Link
                 to="/agendar"
-                className="bg-ink text-paper px-8 py-4 uppercase text-xs font-bold tracking-widest hover:bg-gold hover:text-ink transition-colors"
+                className="bg-ink text-paper px-6 md:px-8 py-3 md:py-4 uppercase text-xs font-bold tracking-widest hover:bg-gold hover:text-ink transition-colors"
               >
                 Reservar agora
               </Link>
@@ -47,14 +47,16 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="bg-ink text-paper py-20 px-6 md:px-12">
+      <section className="bg-ink text-paper py-16 md:py-20 px-4 md:px-12">
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-end justify-between mb-12">
+          <div className="flex items-end justify-between mb-10 md:mb-12">
             <div>
               <span className="text-[10px] uppercase tracking-[0.3em] text-gold">
                 Menu
               </span>
-              <h2 className="font-serif text-4xl mt-2 italic">O cardápio da casa</h2>
+              <h2 className="font-serif text-3xl md:text-4xl mt-2 italic">
+                O cardápio da casa
+              </h2>
             </div>
             <Link
               to="/agendar"
@@ -67,18 +69,18 @@ export function HomePage() {
             {SERVICES.map((s) => (
               <div
                 key={s.id}
-                className="py-6 grid grid-cols-12 gap-4 items-baseline"
+                className="py-6 grid grid-cols-12 gap-x-4 gap-y-2 items-baseline"
               >
-                <h3 className="col-span-12 md:col-span-4 font-serif text-2xl">
+                <h3 className="col-span-12 md:col-span-4 font-serif text-xl md:text-2xl">
                   {s.name}
                 </h3>
-                <p className="col-span-8 md:col-span-5 text-sm text-paper/50">
+                <p className="col-span-12 md:col-span-5 text-sm text-paper/50">
                   {s.description}
                 </p>
-                <p className="col-span-2 md:col-span-1 text-xs uppercase tracking-widest text-paper/40">
+                <p className="col-span-6 md:col-span-1 text-xs uppercase tracking-widest text-paper/40">
                   {s.durationMin}min
                 </p>
-                <p className="col-span-2 md:col-span-2 text-right font-serif text-2xl text-gold">
+                <p className="col-span-6 md:col-span-2 text-right font-serif text-xl md:text-2xl text-gold">
                   R$ {s.priceBRL}
                 </p>
               </div>
@@ -87,7 +89,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="px-6 md:px-12 max-w-7xl mx-auto py-24">
+      <section className="px-4 md:px-12 max-w-7xl mx-auto py-16 md:py-24">
         <div className="mb-12">
           <span className="text-[10px] uppercase tracking-[0.3em] text-gold">
             Equipe

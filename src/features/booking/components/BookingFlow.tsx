@@ -10,6 +10,7 @@ import type {
   ServiceId,
 } from '../../../domain/types'
 import { toIsoDate } from '../../../shared/lib/date'
+import { formatPhoneBR, phoneDigits } from '../../../shared/lib/phone'
 import { hhmmToMinutes, minutesToHHmm } from '../../../shared/lib/time'
 import { useAppointmentsStore } from '../../appointments/store'
 import { pickProfessionalForAny } from '../logic/assignment'
@@ -54,7 +55,6 @@ export function BookingFlow() {
   const days = useMemo(() => nextOpenDays(MAX_DAYS_AHEAD), [])
   const allDaySlots = useMemo(() => generateDaySlots(), [])
   const eligibleProfs = serviceId ? getProfessionalsForService(serviceId) : []
-  const now = useMemo(() => new Date(), [appointments])
 
   const availableSlots = useMemo(() => {
     if (!serviceId || !professional || !date) return []
@@ -63,9 +63,9 @@ export function BookingFlow() {
       professional,
       date,
       appointments,
-      now,
+      now: new Date(),
     })
-  }, [serviceId, professional, date, appointments, now])
+  }, [serviceId, professional, date, appointments])
 
   function pickService(id: ServiceId) {
     setServiceId(id)
@@ -99,8 +99,12 @@ export function BookingFlow() {
   function confirm() {
     setError(null)
     if (!serviceId || !professional || !date || !time) return
-    if (!customer.name.trim() || !customer.phone.trim()) {
-      setError('Preencha nome e telefone.')
+    if (!customer.name.trim()) {
+      setError('Informe seu nome.')
+      return
+    }
+    if (phoneDigits(customer.phone).length < 10) {
+      setError('Telefone inválido. Inclua DDD e número.')
       return
     }
 
@@ -127,7 +131,7 @@ export function BookingFlow() {
       date,
       startTime: time,
       appointments,
-      now,
+      now: new Date(),
     })
     if (verdict !== null) {
       setError(translateError(verdict))
@@ -170,17 +174,19 @@ export function BookingFlow() {
       date &&
       time &&
       customer.name.trim() &&
-      customer.phone.trim(),
+      phoneDigits(customer.phone).length >= 10,
   )
 
   return (
-    <main className="max-w-7xl mx-auto px-6 md:px-12 py-12 grid lg:grid-cols-12 gap-12">
-      <div className="lg:col-span-8 space-y-12">
+    <main className="max-w-7xl mx-auto px-4 md:px-12 py-8 md:py-12 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+      <div className="lg:col-span-8 space-y-10 md:space-y-12 min-w-0">
         <header>
           <span className="text-[10px] uppercase tracking-[0.3em] text-gold">
             Etapa {stepNumber} de {TOTAL_STEPS}
           </span>
-          <h1 className="font-serif text-5xl italic mt-2">Reserve seu horário</h1>
+          <h1 className="font-serif text-4xl md:text-5xl italic mt-2">
+            Reserve seu horário
+          </h1>
         </header>
 
         <Step n={1} title="Escolha o serviço">
@@ -227,7 +233,7 @@ export function BookingFlow() {
 
         {serviceId && professional && (
           <Step n={3} title="Escolha a data">
-            <div className="flex gap-2 overflow-x-auto pb-2 -mx-1 px-1">
+            <div className="flex gap-2 overflow-x-auto pb-2">
               {days.map((d) => (
                 <DayButton
                   key={d}
@@ -258,12 +264,15 @@ export function BookingFlow() {
                 label="Nome completo"
                 value={customer.name}
                 onChange={(v) => setCustomer({ ...customer, name: v })}
+                maxLength={60}
               />
               <TextField
                 label="Telefone"
                 value={customer.phone}
-                onChange={(v) => setCustomer({ ...customer, phone: v })}
+                onChange={(v) => setCustomer({ ...customer, phone: formatPhoneBR(v) })}
                 placeholder="(11) 99999-9999"
+                maxLength={15}
+                inputMode="tel"
               />
             </div>
           </Step>
