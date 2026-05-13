@@ -5,6 +5,11 @@ export function toIsoDate(date: Date): string {
   return `${y}-${m}-${d}`
 }
 
+export function parseIsoDate(iso: string): Date {
+  const [y, m, d] = iso.split('-').map(Number)
+  return new Date(y, m - 1, d)
+}
+
 export function isSameDay(isoDate: string, reference: Date): boolean {
   return isoDate === toIsoDate(reference)
 }

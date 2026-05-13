@@ -10,6 +10,7 @@ export type ProfessionalId = 'carlos' | 'marina' | 'joao'
 export type Service = {
   id: ServiceId
   name: string
+  description: string
   durationMin: number
   priceBRL: number
 }
@@ -17,6 +18,7 @@ export type Service = {
 export type Professional = {
   id: ProfessionalId
   name: string
+  role: string
   services: ServiceId[]
 }
 

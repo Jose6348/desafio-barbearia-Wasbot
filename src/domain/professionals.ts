@@ -1,9 +1,9 @@
 import type { Professional, ProfessionalId, ServiceId } from './types'
 
 export const PROFESSIONALS: readonly Professional[] = [
-  { id: 'carlos', name: 'Carlos', services: ['corte', 'barba', 'corte-barba'] },
-  { id: 'joao', name: 'João', services: ['corte', 'barba', 'hidratacao', 'corte-hidratacao'] },
-  { id: 'marina', name: 'Marina', services: ['corte', 'hidratacao'] },
+  { id: 'carlos', name: 'Carlos', role: 'Especialista em navalha', services: ['corte', 'barba', 'corte-barba'] },
+  { id: 'joao', name: 'João', role: 'Mestre clássico', services: ['corte', 'barba', 'hidratacao', 'corte-hidratacao'] },
+  { id: 'marina', name: 'Marina', role: 'Visagismo e hidratação', services: ['corte', 'hidratacao'] },
 ] as const
 
 export function getProfessionalById(id: ProfessionalId): Professional {
